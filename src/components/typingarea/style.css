@@ -1,0 +1,54 @@
+.topdiv {
+  height: 100vh;
+  width: 100vw;
+  background: rgb(20, 20, 20);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.timer {
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-bottom: 70px;
+  font-size: 60px;
+}
+.firstdiv,
+.seconddiv {
+  background: rgb(148, 147, 147);
+  width: 50vw;
+  text-align: center;
+  position: relative;
+  padding: 30px;
+}
+.wordsdisplaydiv {
+  margin: 40px 10px;
+  display: flex;
+  justify-content: space-around;
+}
+.inputstart {
+  margin: 10px 10px;
+}
+.typinginput {
+  padding: 10px;
+  width: 300px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.startbutton,
+.startagainbutton {
+  /* margin-left: 30px; */
+  outline: none;
+  padding: 3px 7px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.resultdisplay {
+  margin: 20px 10px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.resultdisplay h1 {
+  font-size: x-large;
+}
