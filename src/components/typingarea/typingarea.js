@@ -29,7 +29,7 @@ function Typingarea() {
       let wpm = crct * 6;
       async function postdata() {
         await axios.post(
-          "http://localhost:5000/users/userinfopost",
+          "https://typingtoolbackend.herokuapp.com/users/userinfopost",
           {
             typingmatches: {
               accuracy,

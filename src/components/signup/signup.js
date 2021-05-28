@@ -14,7 +14,7 @@ function Signup() {
     console.log("entered");
     e.preventDefault();
     await axios
-      .post("http://localhost:5000/users/signup", {
+      .post("https://typingtoolbackend.herokuapp.com/users/signup", {
         username: username,
         email: email,
         password: password,

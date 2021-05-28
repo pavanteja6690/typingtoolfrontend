@@ -14,10 +14,14 @@ function Signup() {
     console.log("entered");
     e.preventDefault();
     await axios
-      .post("http://localhost:5000/users/login", {
-        username: username,
-        password: password,
-      })
+      .post(
+        "https://typingtoolbackend.herokuapp.com/users/login",
+
+        {
+          username: username,
+          password: password,
+        }
+      )
       .then((res) => {
         console.log(res);
         localStorage.setItem("typingtool-token", res.data.token);
