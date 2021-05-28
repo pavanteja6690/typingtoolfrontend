@@ -4,6 +4,7 @@ import { useState } from "react";
 import randomWords from "random-words";
 import Header from "../header/header";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 function Typingarea() {
   const startbutton = useRef();
   const firstdiv = useRef();
@@ -18,18 +19,32 @@ function Typingarea() {
   const dispatch = useDispatch();
   var inputref = useRef();
   var timerref = useRef(0);
-  const [isRunning, setisrunning] = useState(false);
+  const [isRunning, setisrunning] = useState(true);
 
   useEffect(() => {
-    if (!isRunning)
-      dispatch({
-        type: "setaccuracy",
-        payload: { crct: crct, wrong: wrong },
-      });
-    dispatch({
-      type: "setwpm",
-      payload: { crct: crct, wrong: wrong },
-    });
+    if (!isRunning) {
+      dispatch({ type: "setmatch", payload: { crct, wrong } });
+      let token = `Bearer ${localStorage.getItem("typingtool-token")}`;
+      let accuracy = crct + wrong === 0 ? 0 : (crct / (crct + wrong)) * 100;
+      let wpm = crct * 6;
+      async function postdata() {
+        await axios.post(
+          "http://localhost:5000/users/userinfopost",
+          {
+            typingmatches: {
+              accuracy,
+              wpm,
+            },
+          },
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+      }
+      postdata();
+    }
   }, [isRunning, crct, wrong, dispatch]);
 
   const startagainclickhandler = () => {
@@ -43,7 +58,7 @@ function Typingarea() {
     setcrct(0);
     setwrong(0);
     settypedword("");
-    setisrunning(false);
+    setisrunning(true);
 
     firstdiv.current.style.display = "block";
     seconddiv.current.style.display = "none";

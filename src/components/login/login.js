@@ -4,10 +4,12 @@ import axios from "axios";
 import { Form, FormControl, FormGroup, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 function Signup() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
   const loginhandler = async (e) => {
     console.log("entered");
     e.preventDefault();
@@ -18,7 +20,9 @@ function Signup() {
       })
       .then((res) => {
         console.log(res);
-        localStorage.setItem("typing-tool-token", res.data.token);
+        localStorage.setItem("typingtool-token", res.data.token);
+        dispatch({ type: "SET_USER", payload: res.data.user });
+        dispatch({ type: "setdetails", payload: res.data.user });
         history.push("/");
       })
       .catch((err) => {

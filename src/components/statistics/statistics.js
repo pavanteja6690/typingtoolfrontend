@@ -1,7 +1,21 @@
 import React, { useState } from "react";
 import Chart from "react-google-charts";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 function Statistics() {
   const [charttype, setcharttype] = useState("LineChart");
+  const { typingmatches, sumwpm, sumaccuracy, cnt } = useSelector(
+    (state) => state.typingdetails
+  );
+  console.log(typingmatches, sumaccuracy, sumwpm, cnt);
+  let k = 0;
+  let temparr = [];
+  temparr.push(["matchnumber", "wpm", "accuracy"]);
+  typingmatches.forEach((typingmatch) => {
+    temparr.push([k, typingmatch.wpm, typingmatch.accuracy]);
+    k += 1;
+  });
+
   return (
     <div
       style={{
@@ -58,6 +72,9 @@ function Statistics() {
         >
           SteppedAreaChart
         </h4>
+        <Link to="/">
+          <h5>play again</h5>
+        </Link>
       </div>
       <div>
         <Chart
@@ -65,15 +82,7 @@ function Statistics() {
           height={"400px"}
           chartType={charttype}
           loader={<div>Loading Chart</div>}
-          data={[
-            ["matchnumber", "wpm", "accuracy"],
-            [0, 40, 80],
-            [1, 42, 80],
-            [2, 45, 80],
-            [3, 50, 80],
-            [4, 60, 80],
-            [5, 75, 90],
-          ]}
+          data={temparr}
           options={{
             title: "Your typing matches statistics",
             hAxis: { title: "matchnumber", minValue: 0 },
@@ -96,6 +105,8 @@ function Statistics() {
           ]}
           rootProps={{ "data-testid": "2" }}
         />
+        <h3 className="text-center">Average wpm:{sumwpm / cnt}</h3>
+        <h3 className="text-center">Average accuracy:{sumaccuracy / cnt}</h3>
       </div>
     </div>
   );
