@@ -5,6 +5,7 @@ import randomWords from "random-words";
 import Header from "../header/header";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+
 function Typingarea() {
   const startbutton = useRef();
   const firstdiv = useRef();
@@ -27,7 +28,9 @@ function Typingarea() {
       let token = `Bearer ${localStorage.getItem("typingtool-token")}`;
       let accuracy = crct + wrong === 0 ? 0 : (crct / (crct + wrong)) * 100;
       let wpm = crct * 6;
+
       async function postdata() {
+        console.log("entered");
         await axios.post(
           "https://typingtoolbackend.herokuapp.com/users/userinfopost",
           {
@@ -59,7 +62,6 @@ function Typingarea() {
     setwrong(0);
     settypedword("");
     setisrunning(true);
-
     firstdiv.current.style.display = "block";
     seconddiv.current.style.display = "none";
   };

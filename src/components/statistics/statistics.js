@@ -12,8 +12,10 @@ function Statistics() {
   let temparr = [];
   temparr.push(["matchnumber", "wpm", "accuracy"]);
   typingmatches.forEach((typingmatch) => {
-    temparr.push([k, typingmatch.wpm, typingmatch.accuracy]);
-    k += 1;
+    if (typingmatch) {
+      temparr.push([k, typingmatch.wpm, typingmatch.accuracy]);
+      k += 1;
+    }
   });
 
   return (

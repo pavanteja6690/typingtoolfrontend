@@ -11,8 +11,8 @@ export const typingdetails = (state = initialstate, { type, payload }) => {
         sumwpm = 0,
         cnt = 0;
       payload.typingmatches.forEach((e) => {
-        sumaccuracy += e.accuracy;
-        sumwpm += e.wpm;
+        sumaccuracy += e ? (e.accuracy ? e.accuracy : 0) : 0;
+        sumwpm += e ? (e.wpm ? e.wpm : 0) : 0;
         cnt++;
       });
       return {
